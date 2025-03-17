@@ -20,7 +20,6 @@ const db = new sqlite3.Database("database.db");
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "../frontend/out")));
 
-// Lista de estados
 const estados = [
     { nome: "Rondônia", sigla: "RO", id: 11 },
     { nome: "Acre", sigla: "AC", id: 12 },
@@ -51,7 +50,6 @@ const estados = [
     { nome: "Distrito Federal", sigla: "DF", id: 53 },
 ];
 
-// Função para verificar se a tabela está vazia
 const tabelaVazia = (tabela) => {
     return new Promise((resolve, reject) => {
         db.get(`SELECT COUNT(*) AS count FROM ${tabela}`, (err, row) => {
@@ -61,7 +59,6 @@ const tabelaVazia = (tabela) => {
     });
 };
 
-// Função para inserir estados
 const inserirEstados = () => {
     return new Promise((resolve, reject) => {
         const query = "INSERT INTO Estados (id, sigla, nome) VALUES (?, ?, ?)";
@@ -80,7 +77,6 @@ const inserirEstados = () => {
     });
 };
 
-// Função para inserir cidades de um estado
 const inserirCidades = (estadoId) => {
     return new Promise((resolve, reject) => {
         axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoId}/municipios`)
@@ -104,7 +100,6 @@ const inserirCidades = (estadoId) => {
     });
 };
 
-// Função para inicializar o banco de dados
 const inicializarBancoDeDados = async () => {
     try {
         const estadosVazios = await tabelaVazia("Estados");
@@ -129,29 +124,28 @@ const inicializarBancoDeDados = async () => {
     }
 };
 
-// Inicializar o banco de dados ao iniciar o servidor
 inicializarBancoDeDados();
 
 const schema = Joi.object({
-        nome: Joi.string().required(),
-        data_nascimento: Joi.date().required(),
-        cpf: Joi.string().pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/).required(),
-        telefone: Joi.string().pattern(/^\(\d{2}\) \d{5}-\d{4}$/).required(),
-        email: Joi.string().email().required(),
-        logradouro: Joi.string().required(),
-        bairro: Joi.string().required(),
-        numero: Joi.string().required(),
-        cidade: Joi.string().required(),
-        estado: Joi.string().required(),
-        cep: Joi.string().pattern(/^\d{5}-\d{3}$/).required(),
-        numero_nota: Joi.string().required(),
-        cnpj_empresa: Joi.string().pattern(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/).required(),
-        data_compra: Joi.date().required(),
-        resposta: Joi.string().required(),
+    nome: Joi.string().required(),
+    data_nascimento: Joi.date().required(),
+    cpf: Joi.string().pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/).required(),
+    telefone: Joi.string().pattern(/^\(\d{2}\) \d{5}-\d{4}$/).required(),
+    email: Joi.string().email().required(),
+    logradouro: Joi.string().required(),
+    bairro: Joi.string().required(),
+    numero: Joi.string().required(),
+    cidade: Joi.string().required(),
+    estado: Joi.string().required(),
+    cep: Joi.string().pattern(/^\d{5}-\d{3}$/).required(),
+    numero_nota: Joi.string().required(),
+    cnpj_empresa: Joi.string().pattern(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/).required(),
+    data_compra: Joi.date().required(),
+    resposta: Joi.string().required(),
 });
 
 app.post("/api/form", (req, res) => {
-    console.log(req.body)
+    console.log(req.body);
     const { error } = schema.validate(req.body, { abortEarly: false });
     if (error) {
         const erros = error.details.reduce((acc, curr) => {
@@ -166,35 +160,18 @@ app.post("/api/form", (req, res) => {
     db.serialize(() => {
         db.run("BEGIN TRANSACTION");
 
-        try {
-            db.run(
-                "INSERT INTO Clientes (nome, data_nascimento, cpf, telefone, email) VALUES (?, ?, ?, ?, ?)",
-                [
-                    formulario.nome,
-                    formulario.data_nascimento,
-                    formulario.cpf,
-                    formulario.telefone,
-                    formulario.email,
-                ],
-                function (err) {
-                    if (err) {
-                        db.run("ROLLBACK");
-                        return res.status(400).json({ error: "Erro ao inserir cliente." });
-                    }
-                    const clienteId = this.lastID;
+        db.get(
+            "SELECT id FROM Clientes WHERE cpf = ?",
+            [formulario.cpf],
+            (err, cliente) => {
+                if (err) {
+                    db.run("ROLLBACK");
+                    return res.status(500).json({ error: "Erro ao buscar cliente." });
+                }
 
-                    db.run(
-                        "INSERT INTO Enderecos (cliente_id, logradouro, bairro, numero, cidade_id, cep) VALUES (?, ?, ?, ?, ?, ?)",
-                        [
-                            clienteId,
-                            formulario.logradouro,
-                            formulario.bairro,
-                            formulario.numero,
-                            formulario.cidade,
-                            formulario.cep,
-                        ]
-                    );
+                let clienteId;
 
+                const finalizarTransacao = () => {
                     db.run(
                         "INSERT INTO NotasFiscais (cliente_id, numero_nota, cnpj_empresa, data_compra) VALUES (?, ?, ?, ?)",
                         [
@@ -202,24 +179,75 @@ app.post("/api/form", (req, res) => {
                             formulario.numero_nota,
                             formulario.cnpj_empresa,
                             formulario.data_compra,
-                        ]
-                    );
+                        ],
+                        (err) => {
+                            if (err) {
+                                db.run("ROLLBACK");
+                                return res.status(400).json({ error: "Erro ao inserir nota fiscal." });
+                            }
 
+                            db.run(
+                                "INSERT INTO Respostas (cliente_id, resposta) VALUES (?, ?)",
+                                [clienteId, formulario.resposta],
+                                (err) => {
+                                    if (err) {
+                                        db.run("ROLLBACK");
+                                        return res.status(400).json({ error: "Erro ao inserir resposta." });
+                                    }
+
+                                    db.run("COMMIT", () => {
+                                        res.json({ message: "Formulário enviado com sucesso!" });
+                                    });
+                                }
+                            );
+                        }
+                    );
+                };
+
+                if (cliente) {
+                    clienteId = cliente.id;
+                    finalizarTransacao();
+                } else {
                     db.run(
-                        "INSERT INTO Respostas (cliente_id, resposta) VALUES (?, ?)",
-                        [clienteId, formulario.resposta]
-                    );
+                        "INSERT INTO Clientes (nome, data_nascimento, cpf, telefone, email) VALUES (?, ?, ?, ?, ?)",
+                        [
+                            formulario.nome,
+                            formulario.data_nascimento,
+                            formulario.cpf,
+                            formulario.telefone,
+                            formulario.email,
+                        ],
+                        function (err) {
+                            if (err) {
+                                db.run("ROLLBACK");
+                                return res.status(400).json({ error: "Erro ao inserir cliente." });
+                            }
+                            clienteId = this.lastID;
 
-                    db.run("COMMIT", () => {
-                        res.json({ message: "Formulário enviado com sucesso!" });
-                    });
+                            db.run(
+                                "INSERT INTO Enderecos (cliente_id, logradouro, bairro, numero, cidade_id, cep) VALUES (?, ?, ?, ?, ?, ?)",
+                                [
+                                    clienteId,
+                                    formulario.logradouro,
+                                    formulario.bairro,
+                                    formulario.numero,
+                                    formulario.cidade,
+                                    formulario.cep,
+                                ],
+                                (err) => {
+                                    if (err) {
+                                        db.run("ROLLBACK");
+                                        return res.status(400).json({ error: "Erro ao inserir endereço." });
+                                    }
+
+                                    finalizarTransacao();
+                                }
+                            );
+                        }
+                    );
                 }
-            );
-        } catch (error) {
-            db.run("ROLLBACK");
-            console.error("Erro no servidor:", error);
-            res.status(500).json({ error: "Erro interno no servidor." });
-        }
+            }
+        );
     });
 });
 
