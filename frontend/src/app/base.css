@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
+
+:root {
+  --neutral-dark-1: #1a1a1a;
+  --neutral-dark-2: #2e2e2e;
+  --neutral-dark-3: #4d4d4d;
+  --neutral-dark-4: #6b6b6b;
+  --neutral-dark-5: #878787;
+
+  --neutral-light-1: #ffffff;
+  --neutral-light-2: #d1d1d1;
+  --neutral-light-3: #c2c2c2;
+  --neutral-light-4: #b3b3b3;
+  --neutral-light-5: #a3a3a3;
+
+  --primary-dark: #0A2D4E;
+  --primary: #16499F;
+
+  --secondary-dark: #FF9300;
+  --secondary: #FEBF28;
+
+  --invalid: rgb(181, 19, 19);
+}
+
+:root {
+  --h1-font-family: "Exo 2", sans-serif;
+  --h1-font-size: 75px;
+  --h1-font-style: normal;
+  --h1-font-weight: 700;
+  --h1-letter-spacing: 0;
+
+  --h2-font-family: "Exo 2", sans-serif;
+  --h2-font-size: 54px;
+  --h2-font-style: normal;
+  --h2-font-weight: 700;
+  --h2-letter-spacing: 0;
+
+  --h3-font-family: "Exo 2", sans-serif;
+  --h3-font-size: 39px;
+  --h3-font-style: normal;
+  --h3-font-weight: 700;
+  --h3-letter-spacing: 0;
+
+  --h4-font-family: "Exo 2", sans-serif;
+  --h4-font-size: 32px;
+  --h4-font-style: normal;
+  --h4-font-weight: 550;
+  --h4-letter-spacing: 0;
+
+  --h5-font-family: "Exo 2", sans-serif;
+  --h5-font-size: 18px;
+  --h5-font-style: normal;
+  --h5-font-weight: 550;
+  --h5-letter-spacing: 0;
+
+  --h6-font-family: "Exo 2", sans-serif;
+  --h6-font-size: 18;
+  --h6-font-style: normal;
+  --h6-font-weight: 400;
+  --h6-letter-spacing: 0;
+
+  --text-font-family: "Poppins", sans-serif;
+  --text-font-size: 18px;
+  --text-font-style: normal;
+  --text-font-weight: 400;
+  --text-letter-spacing: 0;
+
+  --caption-font-family: "Poppins", sans-serif;
+  --caption-font-size: 12px;
+  --caption-font-style: normal;
+  --caption-font-weight: 400;
+  --caption-letter-spacing: 0;
+
+  --btn-font-family: "Exo 2", sans-serif;
+  --btn-font-size: 32px;
+  --btn-font-style: normal;
+  --btn-font-weight: 700;
+  --btn-letter-spacing: 0;
+
+  --hyperlink-font-family: "Exo 2", sans-serif;
+  --hyperlink-font-size: 22px;
+  --hyperlink-font-style: normal;
+  --hyperlink-font-weight: 400;
+  --hyperlink-letter-spacing: 0;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background: var(--primary-dark);
+  --color-background-soft: var(--neutral-light-2);
+  --color-background-mute: var(--neutral-light-3);
+
+
+  --color-border: var(--divider-light-2);
+  --color-border-hover: var(--divider-light-1);
+
+  --color-heading: var(--neutral-dark-1);
+  --color-text: var(--neutral-dark-2);
+
+  --section-gap: 160px;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family: var(--text-font-family);
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body h1 {
+  font-family: var(--h1-font-family);
+  font-size: var(--h1-font-size);
+  font-style: var(--h1-font-style);
+  font-weight: var(--h1-font-weight);
+  letter-spacing: var(--h1-letter-spacing);
+}
+
+body h2 {
+  font-family: var(--h2-font-family);
+  font-size: var(--h2-font-size);
+  font-style: var(--h2-font-style);
+  font-weight: var(--h2-font-weight);
+  letter-spacing: var(--h2-letter-spacing);
+}
+
+body h3 {
+  font-family: var(--h3-font-family);
+  font-size: var(--h3-font-size);
+  font-style: var(--h3-font-style);
+  font-weight: var(--h3-font-weight);
+  letter-spacing: var(--h3-letter-spacing);
+}
+
+body h4 {
+  font-family: var(--h4-font-family);
+  font-size: var(--h4-font-size);
+  font-style: var(--h4-font-style);
+  font-weight: var(--h4-font-weight);
+  letter-spacing: var(--h4-letter-spacing);
+}
+
+body h5 {
+  font-family: var(--h5-font-family);
+  font-size: var(--h5-font-size);
+  font-style: var(--h5-font-style);
+  font-weight: var(--h5-font-weight);
+  letter-spacing: var(--h5-letter-spacing);
+}
+
+body h6 {
+  font-family: var(--h6-font-family);
+  font-size: var(--h6-font-size);
+  font-style: var(--h6-font-style);
+  font-weight: var(--h6-font-weight);
+  letter-spacing: var(--h6-letter-spacing);
+}
+
+body p {
+  font-family: var(--text-font-family);
+  font-size: var(--text-font-size);
+  font-style: var(--text-font-style);
+  font-weight: var(--text-font-weight);
+  letter-spacing: var(--text-letter-spacing);
+}
+
+body a {
+  font-family: var(--hyperlink-font-family);
+  font-size: var(--hyperlink-font-size);
+  font-style: var(--hyperlink-font-style);
+  font-weight: var(--hyperlink-font-weight);
+  letter-spacing: var(--hyperlink-letter-spacing);
+}
+
+body button {
+  font-family: var(--btn-font-family);
+  font-size: var(--btn-font-size);
+  font-style: var(--btn-font-style);
+  font-weight: var(--btn-font-weight);
+  letter-spacing: var(--btn-letter-spacing);
+}
+
+body b {
+  font-weight: 700;
+}

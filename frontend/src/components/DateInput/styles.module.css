@@ -1,0 +1,30 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.invalidfield,
+.field {
+  padding: 12px;
+  background-color: var(--neutral-light-1);
+  border-radius: 0.5rem;
+  font-family: var(--text-font-family);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: var(--text-font-weight);
+  line-height: 100%;
+  color: var(--neutral-dark-1);
+}
+
+.field {
+  border: solid 2px var(--neutral-dark-5);
+}
+
+.invalidfield {
+  border: solid 3px var(--invalid);
+}
+
+.invalidmessage {
+  color: var(--invalid);
+}

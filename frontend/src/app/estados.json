@@ -1,0 +1,137 @@
+[
+    {
+        "nome": "Rondônia",
+        "cigla": "RO",
+        "id": 11
+    },
+    {
+        "nome": "Acre",
+        "cigla": "AC",
+        "id": 12
+    },
+    {
+        "nome": "Amazonas",
+        "cigla": "AM",
+        "id": 13
+    },
+    {
+        "nome": "Roraima",
+        "cigla": "RR",
+        "id": 14
+    },
+    {
+        "nome": "Pará",
+        "cigla": "PA",
+        "id": 15
+    },
+    {
+        "nome": "Amapá",
+        "cigla": "AP",
+        "id": 16
+    },
+    {
+        "nome": "Tocantins",
+        "cigla": "TO",
+        "id": 17
+    },
+    {
+        "nome": "Maranhão",
+        "cigla": "MA",
+        "id": 21
+    },
+    {
+        "nome": "Piauí",
+        "cigla": "PI",
+        "id": 22
+    },
+    {
+        "nome": "Ceará",
+        "cigla": "CE",
+        "id": 23
+    },
+    {
+        "nome": "Rio Grande do Norte",
+        "cigla": "RN",
+        "id": 24
+    },
+    {
+        "nome": "Paraíba",
+        "cigla": "PB",
+        "id": 25
+    },
+    {
+        "nome": "Pernambuco",
+        "cigla": "PE",
+        "id": 26
+    },
+    {
+        "nome": "Alagoas",
+        "cigla": "AL",
+        "id": 27
+    },
+    {
+        "nome": "Sergipe",
+        "cigla": "SE",
+        "id": 28
+    },
+    {
+        "nome": "Bahia",
+        "cigla": "BA",
+        "id": 29
+    },
+    {
+        "nome": "Minas Gerais",
+        "cigla": "MG",
+        "id": 31
+    },
+    {
+        "nome": "Espírito Santo",
+        "cigla": "ES",
+        "id": 32
+    },
+    {
+        "nome": "Rio de Janeiro",
+        "cigla": "RJ",
+        "id": 33
+    },
+    {
+        "nome": "São Paulo",
+        "cigla": "SP",
+        "id": 35
+    },
+    {
+        "nome": "Paraná",
+        "cigla": "PR",
+        "id": 41
+    },
+    {
+        "nome": "Santa Catarina",
+        "cigla": "SC",
+        "id": 42
+    },
+    {
+        "nome": "Rio Grande do Sul",
+        "cigla": "RS",
+        "id": 43
+    },
+    {
+        "nome": "Mato Grosso do Sul",
+        "cigla": "MS",
+        "id": 50
+    },
+    {
+        "nome": "Mato Grosso",
+        "cigla": "MT",
+        "id": 51
+    },
+    {
+        "nome": "Goiás",
+        "cigla": "GO",
+        "id": 52
+    },
+    {
+        "nome": "Distrito Federal",
+        "cigla": "DF",
+        "id": 53
+    }
+]
