@@ -13,7 +13,7 @@ export default function ComboInput(props: ComboInputProps) {
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
         disabled={props.disabled || !props.options.length} // Desabilita se não houver opções
-        className={styles.field}
+        className={props.isInvalid ? styles.invalidfield : styles.field}
       >
         <option value="" disabled>
           {props.hint}
@@ -24,6 +24,9 @@ export default function ComboInput(props: ComboInputProps) {
           </option>
         ))}
       </select>
+      {props.isInvalid && props.invalid_message && (
+        <p className={styles.invalidmessage}>{props.invalid_message}</p>
+      )}
     </div>
   );
 }
