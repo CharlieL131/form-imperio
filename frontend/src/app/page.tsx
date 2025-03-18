@@ -113,15 +113,18 @@ export default function Home() {
 
       if (!response.ok) {
         const data = await response.json();
-        setErrors(data.errors);
+        if (data.errors) {
+          setErrors(data.errors);
 
-        // Atualiza o estado `isInvalid` para cada campo
-        const newInvalidState: Record<string, boolean> = {};
-        Object.keys(data.errors).forEach((campo) => {
-          newInvalidState[campo] = true;
-        });
-        setIsInvalid(newInvalidState);
-        alert('Erro ao enviar o formulário.');
+          const newInvalidState: Record<string, boolean> = {};
+          Object.keys(data.errors).forEach((campo) => {
+            newInvalidState[campo] = true;
+          });
+          setIsInvalid(newInvalidState);
+        }
+        if (data.error) {
+          alert(data.error);
+        }
       } else {
         alert('Formulário enviado com sucesso!');
         setErrors({});
@@ -129,7 +132,7 @@ export default function Home() {
       }
     } catch (error) {
       console.error(error);
-      alert('Erro ao enviar o formulário.');
+      alert(`Erro ao enviar o formulário.`);
     }
   };
 

@@ -183,7 +183,12 @@ app.post("/api/form", (req, res) => {
                         (err) => {
                             if (err) {
                                 db.run("ROLLBACK");
-                                return res.status(400).json({ error: "Erro ao inserir nota fiscal." });
+                                let msg = err.message;
+                                if (msg.includes("SQLITE_CONSTRAINT: UNIQUE") && msg.includes("constraint failed") && msg.includes("NotasFiscais.numero_nota")) {
+                                    msg = "Essa nota fiscal já foi cadastrada."
+                                }
+                                console.log(msg)
+                                return res.status(400).json({ error: `Erro ao inserir nota fiscal: \n${msg}` });
                             }
 
                             db.run(
