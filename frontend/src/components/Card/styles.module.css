@@ -28,5 +28,13 @@
     max-width: calc(100% - 10px);
     padding: 24px 48px;
   }
+
+  @media (max-width: 1024px) {
+    .card .cardbody {
+
+      padding: 12px 24px;
+    }
+  
+  }
   
   

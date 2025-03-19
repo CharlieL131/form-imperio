@@ -53,3 +53,20 @@
     border-radius: 8px;
     box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.6);
 }
+
+@media (max-width: 1024px) {
+    .inputwraper {
+
+      flex-direction: column;
+    }
+
+    .inputwraper2 {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .formpage .formbody {
+        padding: 5% 5%;
+    }
+  
+  }
