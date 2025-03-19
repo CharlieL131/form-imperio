@@ -7,7 +7,7 @@ import TextInput from "@/components/TextInput";
 import DateInput from "@/components/DateInput";
 import FormattedInput from "@/components/FormattedTextInput";
 import { formatCPF, validateCPF, formatPhone, formatOnlyNumber, formatOnlyNumberNoLimit, formatCNPJ, validateCNPJ } from "@/utils/number"
-import { validateDOB, validateDateOfPurchase } from "@/utils/date"
+import { validateDOB } from "@/utils/date"
 import ComboBox from '@/components/ComboInput';
 import { sortStatesByName, formatCEP } from '@/utils/locations'
 import stateList from "./estados.json"
@@ -36,10 +36,8 @@ export default function Home() {
 
   const [mae, setMae] = useState('');
 
-  // Estado para armazenar erros
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Estados para controlar a validade de cada campo
   const [isInvalid, setIsInvalid] = useState<Record<string, boolean>>({
     nome: false,
     data_nascimento: false,
@@ -76,11 +74,10 @@ export default function Home() {
 
   const sorted_list = sortStatesByName(stateList);
   const state_list = sorted_list.map((estado) => ({
-    value: estado.id.toString(), // Converte o ID para string
-    label: `${estado.nome} (${estado.cigla})`, // Formata o label
+    value: estado.id.toString(),
+    label: `${estado.nome} (${estado.cigla})`,
   }));
 
-  // Função para enviar o formulário
   const enviarFormulario = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -128,7 +125,7 @@ export default function Home() {
       } else {
         alert('Formulário enviado com sucesso!');
         setErrors({});
-        setIsInvalid({}); // Limpa o estado `isInvalid`
+        setIsInvalid({});
       }
     } catch (error) {
       console.error(error);
@@ -298,9 +295,10 @@ export default function Home() {
                 title="Data da Compra"
                 invalid_message={errors.data_compra || "Data Inválida"}
                 value={dateOfPurchase}
-                validate={validateDateOfPurchase}
                 onChange={(value) => setDateOfPurchase(value)}
                 isInvalid={isInvalid.data_compra}
+                min="2025-05-01"
+                max="2025-05-31"
               />
               <FormattedInput
                 id="cnpj"

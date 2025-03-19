@@ -1,5 +1,4 @@
 
-import Image from 'next/image';
 import styles from './styles.module.css';
 
 export default function HeaderImperio() {
@@ -7,10 +6,10 @@ export default function HeaderImperio() {
     <header className={styles.header}>
       <div className={styles.top}>
         <div className={styles.logo}>
-          <Image
+          <img
             src='/logo-imperio.png'
             alt="Logo"
-            fill
+            style={{width: "100%", height: "100%"}}
           />
         </div>
 

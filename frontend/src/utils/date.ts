@@ -8,15 +8,3 @@ export function validateDOB(strDOB: string): boolean {
     if (yearDiff < 18) return false;
     return true;
 }
-
-export function validateDateOfPurchase(strDate: string): boolean {
-
-    const dateFrom = Date.parse("2025-05-01");
-    const dateTo = Date.parse("2025-05-31");
-    const dateCheck = Date.parse(strDate);
-
-    if (dateFrom > dateCheck) return false;
-    if(dateTo < dateCheck) return false;
-
-    return true;
-}

@@ -9,4 +9,6 @@ export interface DateInputProps {
     onChange?: (value: string) => void;
     validate?: (value: string) => boolean;
     isInvalid?: boolean;
+    min?: string;
+    max?: string;
 }
