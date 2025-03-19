@@ -124,6 +124,21 @@ export default function Home() {
         }
       } else {
         alert('Formulário enviado com sucesso!');
+        setCpf('');
+        setDob('');
+        setPhone('');
+        setName('');
+        setEmail('');
+        setLogradouro('');
+        setSelectedEstado('');
+        setSelectedCidade('');
+        setSelectedBairro('');
+        setCEP('');
+        setNumber('');
+        setNoteNum('');
+        setDateOfPurchase('');
+        setCnpj('');
+        setMae('');
         setErrors({});
         setIsInvalid({});
       }
