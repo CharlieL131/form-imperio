@@ -7,7 +7,7 @@ import TextInput from "@/components/TextInput";
 import DateInput from "@/components/DateInput";
 import FormattedInput from "@/components/FormattedTextInput";
 import { formatCPF, validateCPF, formatPhone, formatOnlyNumber, formatOnlyNumberNoLimit, formatCNPJ, validateCNPJ } from "@/utils/number"
-import { validateDOB } from "@/utils/date"
+import { validateDOB, validateDateOfPurchase } from "@/utils/date"
 import ComboBox from '@/components/ComboInput';
 import { sortStatesByName, formatCEP } from '@/utils/locations'
 import stateList from "./estados.json"
@@ -298,7 +298,7 @@ export default function Home() {
                 title="Data da Compra"
                 invalid_message={errors.data_compra || "Data Inválida"}
                 value={dateOfPurchase}
-                validate={validateDOB}
+                validate={validateDateOfPurchase}
                 onChange={(value) => setDateOfPurchase(value)}
                 isInvalid={isInvalid.data_compra}
               />
